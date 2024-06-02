@@ -1,10 +1,31 @@
-function makeTransaction(quantity, pricePerDroid){
-return `You ordered ${quantity} droids worth ${quantity * pricePerDroid} credits!`
-}
-makeTransaction(5, 3000); 
-makeTransaction(3, 1000);
-makeTransaction(10, 500);
+const customer = {
+  username: 'Mango',
+  balance: 24000,
+  discount: 0.1,
+  orders: ['Burger', 'Pizza', 'Salad'],
 
-console.log(makeTransaction(5, 3000));
-console.log(makeTransaction(3, 1000));
-console.log(makeTransaction(10, 500));
+  getBalance() {
+    return this.balance;
+  },
+  getDiscount() {
+    return this.discount;
+  },
+  setDiscount(value) {
+    this.discount = value;
+  },
+  getOrders() {
+    return this.orders;
+  },
+  addOrder(cost, order) {
+    this.balance -= cost - cost * this.discount;
+    this.orders.push(order);
+  },
+};
+
+console.log('TASK-1');
+
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, 'Steak');
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
